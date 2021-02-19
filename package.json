@@ -1,7 +1,7 @@
 {
-  "name": "djact",
+  "name": "react-redux-jwt-auth",
   "version": "1.0.0",
-  "description": "Django + React",
+  "description": "React-Redux JWT Auth (with Django)",
   "scripts": {
     "start:dev": "webpack-dev-server --config webpack.config.dev.js --port 3000",
     "clean:build": "rimraf ../static && mkdir ../static",
@@ -10,7 +10,6 @@
     "postbuild": "rimraf ../static/index.html"
   },
   "main": "index.js",
-  "author": "Constantine",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.21.1",

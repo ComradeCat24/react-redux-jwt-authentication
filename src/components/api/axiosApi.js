@@ -13,7 +13,6 @@ const axiosAPI = axios.create({
     accept: "application/json",
   },
 });
-// console.log(axiosAPI);
 
 axiosAPI.interceptors.response.use(
   (response) => response,
@@ -68,11 +67,11 @@ axiosAPI.interceptors.response.use(
   }
 );
 
-export function setNewHeaders(response) {
+export const setNewHeaders = (response) => {
   console.info(response);
   axiosAPI.defaults.headers["Authorization"] = "Bearer " + response.data.access;
   localStorage.setItem("access_token", response.data.access);
   localStorage.setItem("refresh_token", response.data.refresh);
-}
+};
 
 export default axiosAPI;

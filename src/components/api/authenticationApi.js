@@ -1,33 +1,31 @@
 import axiosAPI, { setNewHeaders } from "./axiosApi";
 
-export async function signUp(data) {
+export const signUp = async (data) => {
   const response = await axiosAPI.post("auth/signup", data);
-  // localStorage.setItem("user", response.data);
   return response;
-}
+};
 
-export async function obtainToken(email, password) {
+export const obtainToken = async (email, password) => {
   const response = await axiosAPI.post("auth/login", {
     email,
     password,
   });
   setNewHeaders(response);
   return response;
-}
+};
 
-export async function refreshToken(refresh) {
+export const refreshToken = async (refresh) => {
   const response = await axiosAPI.post("auth/refresh/", {
     refresh,
   });
   setNewHeaders(response);
   return response;
-}
+};
 
-// eslint-disable-next-line
-export async function logout(accessToken) {
+export const logout = async () => {
   localStorage.removeItem("access_token");
   localStorage.removeItem("refresh_token");
-}
+};
 
 export const isAuthenticated = () => {
   const token = localStorage.getItem("access_token");

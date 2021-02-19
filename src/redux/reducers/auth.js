@@ -1,7 +1,7 @@
 import * as types from "../actions/types";
 import initialState from "./initialState";
 
-export default function authReducer(state = initialState.accessToken, action) {
+const authReducer = (state = initialState.accessToken, action) => {
   switch (action.type) {
     case types.REGISTER_USER_SUCCESS:
       return action.data;
@@ -12,4 +12,6 @@ export default function authReducer(state = initialState.accessToken, action) {
     default:
       return state;
   }
-}
+};
+
+export default authReducer;
