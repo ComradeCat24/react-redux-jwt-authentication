@@ -25,7 +25,7 @@
 
 #### Backend
 
-- [Django](https://www.djangoproject.com/) - [Backend _made by_ ~ @n1snt](https://github.com/n1snt/Website-Backend)
+- [Django](https://www.djangoproject.com/) - [Backend _made by_](https://github.com/n1snt/Website-Backend) ~ [@n1snt](https://github.com/n1snt)
 
 ## Installation
 
@@ -34,4 +34,4 @@
 - `code .`
 - `yarn`
 - `yarn start:dev`
-- `visit [`http://localhost:3000`]`
+- `visit http://localhost:3000`
