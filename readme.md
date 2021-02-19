@@ -25,7 +25,7 @@
 
 #### Backend
 
-- [Django](https://www.djangoproject.com/) - [Backend _made by_](https://github.com/n1snt/Website-Backend) ~ [@n1snt](https://github.com/n1snt)
+- [Django](https://www.djangoproject.com/) - [Backend (link to Repo)](https://github.com/n1snt/Website-Backend) _made by_ ~ [@n1snt](https://github.com/n1snt)
 
 ## Installation
 
