@@ -18,8 +18,9 @@ const LoginPage = ({ loginUser, history }) => {
     event.preventDefault();
     const { email, password } = state;
 
-    await loginUser(email, password);
-    history.push("/");
+    await loginUser(email, password, () => {
+      history.push("/pricing");
+    });
   };
 
   return (

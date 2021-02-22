@@ -17,14 +17,11 @@ const SignupPage = ({ registerUser, loginUser, history }) => {
 
   const register = async (event) => {
     event.preventDefault();
-    await registerUser(state).then(() => login());
-  };
-
-  const login = async () => {
-    const { email, password } = state;
-
-    await loginUser(email, password);
-    history.push("/");
+    await registerUser(state, () => {
+      const { email, password } = state;
+      loginUser(email, password);
+      history.push("/");
+    });
   };
 
   return (

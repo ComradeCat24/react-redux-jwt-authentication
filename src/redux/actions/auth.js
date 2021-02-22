@@ -9,10 +9,11 @@ export const registerUserSuccess = (data) => {
   return { type: types.REGISTER_USER_SUCCESS, data };
 };
 
-export const registerUser = (data) => async (dispatch) => {
+export const registerUser = (registerData, cb) => async (dispatch) => {
   try {
-    const response = await signUp(data);
+    const response = await signUp(registerData);
     dispatch(registerUserSuccess(response.data));
+    cb(); //callback
   } catch (error) {
     console.log(error);
   }
@@ -22,10 +23,11 @@ export const loginUserSuccess = (token) => {
   return { type: types.LOGIN_USER_SUCCESS, token };
 };
 
-export const loginUser = (username, password) => async (dispatch) => {
+export const loginUser = (username, password, cb) => async (dispatch) => {
   try {
     const response = await obtainToken(username, password);
     dispatch(loginUserSuccess(response.data.access));
+    cb(); //callback
   } catch (error) {
     console.log("Error obtaining token. " + error);
   }
