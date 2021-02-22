@@ -21,11 +21,11 @@
 
 - [React](https://reactjs.org/) - The web library/framework used
 - [Redux](https://redux.js.org/) - Centeralized store for state management
-- [JWT](https://jwt.io/) - Used to generate tokens
 
 #### Backend
 
 - [Django](https://www.djangoproject.com/) - [Backend (link to Repo)](https://github.com/n1snt/Website-Backend) _made by_ ~ [@n1snt](https://github.com/n1snt)
+- [JWT](https://jwt.io/) - Used to generate tokens
 
 ## Installation
 
