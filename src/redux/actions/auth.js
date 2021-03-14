@@ -23,14 +23,21 @@ export const loginUserSuccess = (token) => {
   return { type: types.LOGIN_USER_SUCCESS, token };
 };
 
+export const loginUserFailure = (msg) => {
+  return { type: types.LOGIN_USER_FAIL, msg };
+};
+
 export const loginUser = (username, password, cb) => async (dispatch) => {
-  try {
-    const response = await obtainToken(username, password);
-    dispatch(loginUserSuccess(response.data.access));
-    cb(); //callback
-  } catch (error) {
-    console.log("Error obtaining token. " + error);
-  }
+  await obtainToken(username, password)
+    .then((response) => {
+      dispatch(loginUserSuccess(response.data.access));
+      cb(); //callback
+    })
+    .catch((error) => {
+      console.log(error.response.data);
+      // dispatch(loginUserFailure(error.response.data));
+      dispatch(loginUserFailure("ERROR"));
+    });
 };
 
 export const logoutUserSuccess = () => {

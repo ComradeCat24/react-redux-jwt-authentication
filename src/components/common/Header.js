@@ -9,7 +9,7 @@ const Header = ({ accessToken, logoutUser }) => {
 
   const handleLogout = async () => {
     await logoutUser();
-    history.push("login/");
+    history.push("/login");
   };
 
   return (
@@ -42,7 +42,7 @@ Header.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    accessToken: state.auth,
+    accessToken: state.auth.accessToken,
   };
 }
 

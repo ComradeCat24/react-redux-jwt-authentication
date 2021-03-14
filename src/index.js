@@ -8,6 +8,8 @@ import configureStore from "./redux/storeConfig/configureStore";
 
 const store = configureStore();
 
+console.log(store.getState());
+
 render(
   <ReduxProvider store={store}>
     <Router>

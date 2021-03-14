@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { loginUser } from "../../redux/actions/auth";
 
-const LoginPage = ({ loginUser, history }) => {
+const LoginPage = ({ loginUser, history, msg }) => {
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -19,13 +19,14 @@ const LoginPage = ({ loginUser, history }) => {
     const { email, password } = state;
 
     await loginUser(email, password, () => {
-      history.push("/pricing");
+      history.push("/");
     });
   };
 
   return (
     <div>
       <h1>Login page</h1>
+      <p>{msg}</p>
       <form onSubmit={login}>
         <label>
           Email:
@@ -58,8 +59,15 @@ LoginPage.propTypes = {
   history: PropTypes.object.isRequired,
 };
 
+const mapStateToProps = (state) => {
+  console.log(state.auth);
+  return {
+    msg: state.auth.msg,
+  };
+};
+
 const mapDispatchToProps = {
   loginUser,
 };
 
-export default connect(null, mapDispatchToProps)(LoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
