@@ -5,18 +5,24 @@ import {
   logout,
 } from "../../components/api/authenticationApi";
 
-export const registerUserSuccess = (data) => {
-  return { type: types.REGISTER_USER_SUCCESS, data };
+export const registerUserSuccess = () => {
+  return { type: types.REGISTER_USER_SUCCESS };
+};
+
+export const registerUserFailure = (msg) => {
+  return { type: types.REGISTER_USER_FAIL, msg };
 };
 
 export const registerUser = (registerData, cb) => async (dispatch) => {
-  try {
-    const response = await signUp(registerData);
-    dispatch(registerUserSuccess(response.data));
-    cb(); //callback
-  } catch (error) {
-    console.log(error);
-  }
+  await signUp(registerData)
+    .then(() => {
+      dispatch(registerUserSuccess());
+      cb(); //callback
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch(registerUserFailure("ERROR"));
+    });
 };
 
 export const loginUserSuccess = (token) => {

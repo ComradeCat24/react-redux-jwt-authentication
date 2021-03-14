@@ -57,6 +57,7 @@ const LoginPage = ({ loginUser, history, msg }) => {
 LoginPage.propTypes = {
   loginUser: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
+  msg: PropTypes.string,
 };
 
 const mapStateToProps = (state) => {
