@@ -1,64 +1,36 @@
 import React, { Component } from "react";
-import axiosAPI from "../api/axiosApi";
-
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { userData } from "../../redux/actions/auth";
 class ProfilePage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      first_name: "",
-      last_name: "",
-      phone_number: "",
-      gender: "",
-      age: "",
-    };
-  }
-
   async componentDidMount() {
-    await axiosAPI
-      .get("auth/profile")
-      .then((response) => {
-        this.setState(response.data.data[0]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    await this.props.userData();
   }
 
   render() {
-    let data = this.state;
     return (
       <>
         <h1>Profile page</h1>
         <p>Only logged in users should see this</p>
         <br />
-        <p>
-          <strong>First Name: </strong>
-          {this.state.first_name}
-        </p>
-        <p>
-          <strong>Last Name: </strong>
-          {this.state.last_name}
-        </p>
-        <p>
-          <strong>Phone Number: </strong>
-          {this.state.phone_number}
-        </p>
-        <p>
-          <strong>Birth Date: </strong>
-          {this.state.age}
-        </p>
-        <p>
-          <strong>Gender: </strong>
-          {this.state.gender}
-        </p>
-        <br />
-        <hr />
-
-        <strong>Response Data: </strong>
-        <pre>{JSON.stringify(this.state, null, "\b").replace(/{|}/g, "")} </pre>
+        <pre>{JSON.stringify(this.props.profileData, null, "\b")}</pre>
       </>
     );
   }
 }
 
-export default ProfilePage;
+ProfilePage.propTypes = {
+  userData: PropTypes.func.isRequired,
+  profileData: PropTypes.object,
+};
+const mapStateToProps = (state) => {
+  return {
+    profileData: state.auth.profileData,
+  };
+};
+
+const mapDispatchToProps = {
+  userData,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

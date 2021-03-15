@@ -2,6 +2,7 @@ import * as types from "./types";
 import {
   signUp,
   obtainToken,
+  obtainUserData,
   logout,
 } from "../../components/api/authenticationApi";
 
@@ -41,6 +42,17 @@ export const loginUser = (username, password, cb) => async (dispatch) => {
     .catch((error) => {
       dispatch(loginUserFailure(error.response.data));
     });
+};
+
+export const userDataSuccess = (profileData) => {
+  return { type: types.USER_DATA_SUCCESS, profileData };
+};
+
+export const userData = () => async (dispatch) => {
+  await obtainUserData().then((response) => {
+    console.log(response.data[0]);
+    dispatch(userDataSuccess(response.data[0]));
+  });
 };
 
 export const logoutUserSuccess = () => {

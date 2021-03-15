@@ -12,8 +12,11 @@ const authReducer = (state = initialState, action) => {
     case types.LOGIN_USER_FAIL:
       return { ...state, errMsg: action.errMsg };
 
+    case types.USER_DATA_SUCCESS:
+      return { ...state, profileData: action.profileData };
+
     case types.LOGOUT_USER:
-      return { ...state, accessToken: null, errMsg: null };
+      return { ...state, accessToken: null, errMsg: null, profileData: null };
 
     default:
       return state;

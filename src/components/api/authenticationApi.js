@@ -14,6 +14,13 @@ export const obtainToken = async (email, password) => {
   return response;
 };
 
+export const obtainUserData = async () => {
+  const response = await axiosAPI.get("/auth/profile").then((response) => {
+    return response.data;
+  });
+  return response;
+};
+
 export const refreshToken = async (refresh) => {
   const response = await axiosAPI.post("auth/refresh/", {
     refresh,
