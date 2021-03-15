@@ -27,8 +27,9 @@ const SignupPage = ({ registerUser, loginUser, history, errMsg }) => {
   return (
     <div>
       <h1>Signup page</h1>
-
-      {errMsg && JSON.stringify(errMsg)}
+      {errMsg && (
+        <pre>{JSON.stringify(errMsg, null, "\b").replace(/{|}/g, "")} </pre>
+      )}
 
       <form onSubmit={register}>
         <label>

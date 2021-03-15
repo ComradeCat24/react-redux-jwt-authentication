@@ -26,7 +26,10 @@ const LoginPage = ({ loginUser, history, errMsg }) => {
   return (
     <div>
       <h1>Login page</h1>
-      {errMsg && JSON.stringify(errMsg)}
+
+      {errMsg && (
+        <pre>{JSON.stringify(errMsg, null, "\b").replace(/{|}/g, "")} </pre>
+      )}
       <form onSubmit={login}>
         <label>
           Email:

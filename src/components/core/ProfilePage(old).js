@@ -25,7 +25,6 @@ class ProfilePage extends Component {
   }
 
   render() {
-    let data = this.state;
     return (
       <>
         <h1>Profile page</h1>
@@ -53,9 +52,10 @@ class ProfilePage extends Component {
         </p>
         <br />
         <hr />
-
-        <strong>Response Data: </strong>
-        <pre>{JSON.stringify(this.state, null, "\b").replace(/{|}/g, "")} </pre>
+        <p>
+          <strong>Response Data: </strong>
+          {JSON.stringify(this.state)}
+        </p>
       </>
     );
   }
