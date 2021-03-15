@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { registerUser, loginUser } from "../../redux/actions/auth";
 
-const SignupPage = ({ registerUser, loginUser, history, msg }) => {
+const SignupPage = ({ registerUser, loginUser, history, errMsg }) => {
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -27,7 +27,8 @@ const SignupPage = ({ registerUser, loginUser, history, msg }) => {
   return (
     <div>
       <h1>Signup page</h1>
-      <p>{msg}</p>
+
+      {errMsg && JSON.stringify(errMsg)}
 
       <form onSubmit={register}>
         <label>
@@ -149,13 +150,12 @@ SignupPage.propTypes = {
   registerUser: PropTypes.func.isRequired,
   loginUser: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  msg: PropTypes.string,
+  errMsg: PropTypes.object,
 };
 
 const mapStateToProps = (state) => {
-  console.log(state.auth);
   return {
-    msg: state.auth.msg,
+    errMsg: state.auth.errMsg,
   };
 };
 

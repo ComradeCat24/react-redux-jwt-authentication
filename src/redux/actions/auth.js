@@ -9,8 +9,8 @@ export const registerUserSuccess = () => {
   return { type: types.REGISTER_USER_SUCCESS };
 };
 
-export const registerUserFailure = (msg) => {
-  return { type: types.REGISTER_USER_FAIL, msg };
+export const registerUserFailure = (errMsg) => {
+  return { type: types.REGISTER_USER_FAIL, errMsg };
 };
 
 export const registerUser = (registerData, cb) => async (dispatch) => {
@@ -20,8 +20,7 @@ export const registerUser = (registerData, cb) => async (dispatch) => {
       cb(); //callback
     })
     .catch((error) => {
-      console.log(error);
-      dispatch(registerUserFailure("ERROR"));
+      dispatch(registerUserFailure(error.response.data));
     });
 };
 
@@ -29,8 +28,8 @@ export const loginUserSuccess = (token) => {
   return { type: types.LOGIN_USER_SUCCESS, token };
 };
 
-export const loginUserFailure = (msg) => {
-  return { type: types.LOGIN_USER_FAIL, msg };
+export const loginUserFailure = (errMsg) => {
+  return { type: types.LOGIN_USER_FAIL, errMsg };
 };
 
 export const loginUser = (username, password, cb) => async (dispatch) => {
@@ -40,9 +39,7 @@ export const loginUser = (username, password, cb) => async (dispatch) => {
       cb(); //callback
     })
     .catch((error) => {
-      console.log(error.response.data);
-      // dispatch(loginUserFailure(error.response.data));
-      dispatch(loginUserFailure("ERROR"));
+      dispatch(loginUserFailure(error.response.data));
     });
 };
 
