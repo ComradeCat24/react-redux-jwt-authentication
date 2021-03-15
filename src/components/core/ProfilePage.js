@@ -1,36 +1,62 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { userData } from "../../redux/actions/auth";
 class ProfilePage extends Component {
-  async componentDidMount() {
-    await this.props.userData();
-  }
-
   render() {
+    let pdata = this.props.profileData;
     return (
       <>
         <h1>Profile page</h1>
         <p>Only logged in users should see this</p>
         <br />
-        <pre>{JSON.stringify(this.props.profileData, null, "\b")}</pre>
+        <p>
+          <strong>First Name: </strong>
+          {pdata.first_name}
+        </p>
+        <p>
+          <strong>Last Name: </strong>
+          {pdata.last_name}
+        </p>
+        <p>
+          <strong>Phone Number: </strong>
+          {pdata.phone_number}
+        </p>
+        <p>
+          <strong>Birth Date: </strong>
+          {pdata.age}
+        </p>
+        <p>
+          <strong>Gender: </strong>
+          {pdata.gender}
+        </p>
+        <br />
+        <hr />
+        <p>
+          <strong>Response Data: </strong>
+          <pre>
+            {
+              JSON.stringify(this.props.profileData, null, "\b")
+              // .replace(
+              //   /{|}/g,
+              //   ""
+              // )
+            }
+          </pre>
+        </p>
       </>
     );
   }
 }
 
 ProfilePage.propTypes = {
-  userData: PropTypes.func.isRequired,
   profileData: PropTypes.object,
 };
+
 const mapStateToProps = (state) => {
+  console.log(state.auth.profileData);
   return {
     profileData: state.auth.profileData,
   };
 };
 
-const mapDispatchToProps = {
-  userData,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);
+export default connect(mapStateToProps)(ProfilePage);

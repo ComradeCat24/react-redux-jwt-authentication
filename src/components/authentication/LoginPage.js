@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { loginUser } from "../../redux/actions/auth";
+import { loginUser, userData } from "../../redux/actions/auth";
 
-const LoginPage = ({ loginUser, history, errMsg }) => {
+const LoginPage = ({ loginUser, userData, history, errMsg }) => {
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -19,6 +19,7 @@ const LoginPage = ({ loginUser, history, errMsg }) => {
     const { email, password } = state;
 
     await loginUser(email, password, () => {
+      userData();
       history.push("/");
     });
   };
@@ -60,6 +61,7 @@ const LoginPage = ({ loginUser, history, errMsg }) => {
 
 LoginPage.propTypes = {
   loginUser: PropTypes.func.isRequired,
+  userData: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   errMsg: PropTypes.object,
 };
@@ -72,6 +74,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   loginUser,
+  userData,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

@@ -44,15 +44,17 @@ export const loginUser = (username, password, cb) => async (dispatch) => {
     });
 };
 
-export const userDataSuccess = (profileData) => {
-  return { type: types.USER_DATA_SUCCESS, profileData };
-};
-
 export const userData = () => async (dispatch) => {
-  await obtainUserData().then((response) => {
-    console.log(response.data[0]);
-    dispatch(userDataSuccess(response.data[0]));
-  });
+  await obtainUserData()
+    .then((response) => {
+      dispatch({
+        type: types.USER_DATA_FETCHED,
+        profileData: response.data[0],
+      });
+    })
+    .catch((error) => {
+      console.log(error.response);
+    });
 };
 
 export const logoutUserSuccess = () => {

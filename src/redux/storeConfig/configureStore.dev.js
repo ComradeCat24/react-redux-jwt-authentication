@@ -1,17 +1,16 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "../reducers";
-// import reduxImmutableStateInvariant from "redux-immutable-state-invariant";
 import thunk from "redux-thunk";
+import { persistStore } from "redux-persist";
 
-const configureStore = (initialState) => {
-  const composeEnhancers =
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // add support for Redux dev tools
+const middleware = [thunk];
 
-  return createStore(
-    rootReducer,
-    initialState,
-    composeEnhancers(applyMiddleware(thunk))
-  );
-};
+// add support for Redux dev tools
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export default configureStore;
+export const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(...middleware))
+);
+
+export const persistor = persistStore(store);

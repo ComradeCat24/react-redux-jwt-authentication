@@ -1,5 +1,9 @@
 import * as types from "../actions/types";
-import initialState from "./initialState";
+
+const initialState = {
+  accessToken: localStorage.getItem("access_token"),
+  errMsg: null,
+};
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -12,7 +16,7 @@ const authReducer = (state = initialState, action) => {
     case types.LOGIN_USER_FAIL:
       return { ...state, errMsg: action.errMsg };
 
-    case types.USER_DATA_SUCCESS:
+    case types.USER_DATA_FETCHED:
       return { ...state, profileData: action.profileData };
 
     case types.LOGOUT_USER:
